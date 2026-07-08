@@ -5,7 +5,15 @@ const getAllProducts=()=>{
 
     return products
 }
+const getProductById=(id)=>{
+    const products=fileHandler.readProducts()
+
+    const numericId=Number(id)
+
+    return products.find(p=>p.id===numericId)
+}
 
 module.exports={
-    getAllProducts
+    getAllProducts,
+    getProductById
 }
