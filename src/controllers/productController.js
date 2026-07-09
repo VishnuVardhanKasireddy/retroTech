@@ -83,9 +83,27 @@ const putProduct=async(req,res)=>{
     }
 }
 
+const deleteProduct=async(req,res)=>{
+    try{
+        const {id}=req.params
+        
+        const isDeleted=await productServices.deleteProduct(id)
+
+        if(!isDeleted){
+            return res.status(404).json({message:`Product with id : ${id} not found`})
+        }
+
+        return res.status(200).json({message:`Product with id : ${id} is deleted`})
+    }catch(error){
+        console.error(`Error found at deleteProduct Controller : ${error}`)
+        return res.status(500).json({message:"Internal server error!"})
+    }
+}
+
 module.exports = {
     getAllProducts,
     getProductById,
     postProduct,
-    putProduct
+    putProduct,
+    deleteProduct
 }

@@ -50,9 +50,24 @@ const updateProduct=async(id,updates)=>{
     return updatedProduct
 }
 
+const deleteProduct=async(id)=>{
+    const products=await fileHandler.readProducts()
+
+    const index=products.findIndex(p=>p.id===Number(id))
+
+    if(index===-1)
+        return false;
+
+    products.splice(index,1)
+
+    await fileHandler.writeProducts(products)
+    return true
+}
+
 module.exports={
     getAllProducts,
     getProductById,
     createProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct
 }

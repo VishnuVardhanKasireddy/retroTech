@@ -80,16 +80,6 @@
     "description": "Portable cassette player with FM/AM radio."
   },
   {
-    "id": 9,
-    "title": "Sony Trinitron Stencil",
-    "price": 4500,
-    "category": "Stencil",
-    "condition": "Used",
-    "year": 1998,
-    "seller": "RetroTech Seller",
-    "description": "17-inch Sony Trinitron Stencil in working condition."
-  },
-  {
     "id": 10,
     "title": "Nintendo Entertainment System",
     "price": 150,
