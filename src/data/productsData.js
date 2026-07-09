@@ -12,9 +12,9 @@
   {
     "id": 2,
     "title": "IBM ThinkPad 760",
-    "price": 12000,
+    "price": 145,
     "category": "Computer",
-    "condition": "Used",
+    "condition": "Mint Condition",
     "year": 1997,
     "seller": "RetroTech Seller",
     "description": "Vintage IBM ThinkPad laptop with original keyboard and charger."

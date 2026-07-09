@@ -30,8 +30,29 @@ const createProduct=async(product)=>{
     return newProduct
 }
 
+const updateProduct=async(id,updates)=>{
+    const products=await fileHandler.readProducts();
+
+    const index=products.findIndex(p=>p.id===Number(id))
+
+    if(index===-1)
+        return null
+
+    const updatedProduct={
+        ...products[index],
+        ...updates,
+        id:Number(id)
+    }
+    products[index]=updatedProduct
+
+    await fileHandler.writeProducts(products)
+
+    return updatedProduct
+}
+
 module.exports={
     getAllProducts,
     getProductById,
-    createProduct
+    createProduct,
+    updateProduct
 }

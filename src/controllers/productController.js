@@ -56,8 +56,36 @@ const postProduct=async(req,res)=>{
     }
 }
 
+const putProduct=async(req,res)=>{
+    try{
+        const {id}=req.params
+        const updates=req.body
+        if(updates.price!==undefined){
+            if(typeof updates.price!=='number' || updates.price<=0){
+                return res.status(400).json({message:"price must be a number and greater than zero"})
+            }
+        }
+        if(updates.year!==undefined){
+            if(typeof updates.year!=='number' || updates.year<=0){
+                return res.status(400).json({messsage:"year must be a number and greater than zero"})
+            }
+        }
+
+        const updatedProduct=await productServices.updateProduct(id,updates)
+        if(!updatedProduct){
+            return res.status(404).json({message:`Product with id : ${id} not found`})
+        }
+
+        return res.status(200).json(updatedProduct)
+    }catch(error){
+        console.error(`Error found at putProduct controller : ${error}`)
+        return res.status(500).json({message:"Internal server error!"})
+    }
+}
+
 module.exports = {
     getAllProducts,
     getProductById,
-    postProduct
+    postProduct,
+    putProduct
 }
