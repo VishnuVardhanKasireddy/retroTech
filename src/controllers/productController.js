@@ -26,7 +26,38 @@ const getProductById=(req,res)=>{
     }
 }
 
+const postProduct=async(req,res)=>{
+    try{
+        const {title,price,category,condition,year,seller,description}=req.body
+
+        if(!title || !price || !category|| !condition ||!year || !seller || !description)
+            return res.status(400).json({message:"All fields are required (title, price, category, condition, year, seller, description) !"})
+
+        if(typeof price!=="number" || price<=0)
+            return res.status(400).json({message:"Price must be a number and must be greater than zero !"})
+
+        if(typeof year!=="number" || year<=0)
+            return res.status(400).json({message:"Year must be a number and greater than zero !"})
+
+        const newProduct=await productServices.createProduct({
+            title,
+            price,
+            category,
+            condition,
+            year,
+            seller,
+            description
+        })
+
+        return res.status(201).json(newProduct)
+    }catch(error){
+        console.error(`Error at postProduct : ${error}`)
+        return res.status(500).json({message:`Internal server error !`})
+    }
+}
+
 module.exports = {
     getAllProducts,
-    getProductById
+    getProductById,
+    postProduct
 }

@@ -78,5 +78,25 @@
     "year": 2002,
     "seller": "RetroTech Seller",
     "description": "Portable cassette player with FM/AM radio."
+  },
+  {
+    "id": 9,
+    "title": "Sony Trinitron Stencil",
+    "price": 4500,
+    "category": "Stencil",
+    "condition": "Used",
+    "year": 1998,
+    "seller": "RetroTech Seller",
+    "description": "17-inch Sony Trinitron Stencil in working condition."
+  },
+  {
+    "id": 10,
+    "title": "Nintendo Entertainment System",
+    "price": 150,
+    "category": "Electronics",
+    "condition": "Used",
+    "year": 1985,
+    "seller": "RetroGamer85",
+    "description": "Original NES console with two controllers and cables. Tested and working perfectly."
   }
 ]

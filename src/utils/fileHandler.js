@@ -14,7 +14,19 @@ const readProducts= ()=>{
         return []
     }
 }
+const writeProducts=async(productArray)=>{
+    try{
+        const jsonString=JSON.stringify(productArray,null,2)
+
+        await fs.writeFileSync(filePath,jsonString,"utf-8")
+        
+        return true
+    }catch(error){
+        console.error(`Error writing to products : ${error}`)
+    }
+}
 
 module.exports={
-    readProducts
+    readProducts,
+    writeProducts
 }
