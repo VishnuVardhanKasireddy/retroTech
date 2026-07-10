@@ -1,7 +1,27 @@
 const fileHandler = require("../utils/fileHandler.js")
 
-const getAllProducts=()=>{
-    const products = fileHandler.readProducts()
+const getAllProducts=async(filters)=>{
+    let products =await fileHandler.readProducts()
+
+    if(filters.search?.trim()){
+        const searchTerm=filters.search.toLowerCase()
+        products=products.filter(p=>p.title.toLowerCase().includes(searchTerm) || p.description?.toLowerCase().includes(searchTerm))  
+    }
+    if(filters.category?.trim()){
+        products=products.filter(p=>{
+            return p.category.toLowerCase()===filters.category.toLowerCase()
+        })
+    }
+    if(filters.minPrice){
+        products=products.filter(p=>{
+            return p.price>=Number(filters.minPrice)
+        })
+    }
+    if(filters.maxPrice){
+        products=products.filter(p=>{
+            return p.price<=filters.maxPrice
+        })
+    }
 
     return products
 }

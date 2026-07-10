@@ -1,13 +1,31 @@
 const productServices = require("../services/productServices.js")
 
-const getAllProducts = (req,res)=>{
+const getAllProducts = async(req,res)=>{
     try{
-        const products = productServices.getAllProducts()
+        const filters=req.query
 
-        res.status(200).json(products)
+        if((filters.minPrice && isNaN(Number(filters.minPrice)))||(filters.maxPrice && isNaN(Number(filters.maxPrice)))){
+            return res.status(400).json({error:"MinPrice and MaxPrice must be valid integers!"})
+        }
+
+        if(filters.minPrice && Number(filters.minPrice)<0){
+            return res.status(400).json({error:"minimum price can not be negative"})
+        }
+
+        if(filters.maxPrice && Number(filters.maxPrice)<0){
+            return res.status(400).json({error:"maximum price can not be negative"})
+        }
+
+        if(filters.minPrice && filters.maxPrice && Number(filters.minPrice)>Number(filters.maxPrice)){
+            return res.status(400).json({error:"minimum price can not be more than maximum price"})
+        }
+
+        const products = await productServices.getAllProducts(filters)
+
+        return res.status(200).json(products)
     }catch(error){
         console.log("Error in getAllProducts controller : ",error)
-        res.status(500).json({
+        return res.status(500).json({
             error : "Internal server error"
         })
     }
