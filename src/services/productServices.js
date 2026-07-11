@@ -36,6 +36,16 @@ const getAllProducts=async(filters)=>{
         }
     }
 
+    if(filters.page && filters.limit){
+        const page=Number(filters.page)
+        const limit=Number(filters.limit)
+
+        const startIndex=(page-1)*limit
+        const endIndex=startIndex+limit
+
+        products=products.slice(startIndex,endIndex)
+    }
+
     return products
 }
 const getProductById=(id)=>{

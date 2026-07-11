@@ -1,5 +1,5 @@
 
-const validateFilters=async(req,res,next)=>{
+const validateFilters=(req,res,next)=>{
             const filters=req.query
 
             const allowedFields=["price","-price","year","-year"]
@@ -23,6 +23,20 @@ const validateFilters=async(req,res,next)=>{
             if(filters.sort && !allowedFields.includes(filters.sort)){
                 return res.status(400).json({error:`Invalid sort field : ${filters.sort}`})
             }
+
+            if(filters.page === "" || filters.limit === ""){
+                return res.status(400).json({
+                    error:"page and limit cannot be empty"
+                });
+            }
+            
+            if((filters.page && !Number.isInteger(Number(filters.page))) || (filters.limit && !Number.isInteger(Number(filters.limit)))){
+                return res.status(400).json({error:"page and limit must be Integers"})
+            }
+
+            if((filters.page && Number(filters.page)<=0) || (filters.limit && (Number(filters.limit)<=0 || Number(filters.limit)>100))){
+                return res.status(400).json({error:"page and limit must be with in the range (1-100)"})
+            } 
 
             next()
 }
