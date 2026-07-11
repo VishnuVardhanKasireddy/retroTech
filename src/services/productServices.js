@@ -19,8 +19,21 @@ const getAllProducts=async(filters)=>{
     }
     if(filters.maxPrice){
         products=products.filter(p=>{
-            return p.price<=filters.maxPrice
+            return p.price<=Number(filters.maxPrice)
         })
+    }
+    if(filters.sort){
+        switch(filters.sort){
+            case "price" : products.sort((a,b)=>a.price-b.price)
+                           break;
+            case "-price":products.sort((a,b)=>b.price-a.price)
+                          break;
+            case "year":products.sort((a,b)=>a.year-b.year)
+                          break;
+            case "-year":products.sort((a,b)=>b.year-a.year)
+                          break;
+            default : break;
+        }
     }
 
     return products
