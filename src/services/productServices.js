@@ -36,17 +36,24 @@ const getAllProducts=async(filters)=>{
         }
     }
 
+    const pages=Number(filters.page)
+    const limit=Number(filters.limit)
+    const totalProducts=products.length
+    const totalPages=Math.ceil(totalProducts/limit)
     if(filters.page && filters.limit){
-        const page=Number(filters.page)
-        const limit=Number(filters.limit)
-
-        const startIndex=(page-1)*limit
+        const startIndex=(pages-1)*limit
         const endIndex=startIndex+limit
 
         products=products.slice(startIndex,endIndex)
     }
 
-    return products
+    return {
+        pages,
+        limit,
+        totalProducts,
+        totalPages,
+        products
+    }
 }
 const getProductById=(id)=>{
     const products=fileHandler.readProducts()
