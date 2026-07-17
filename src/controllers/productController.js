@@ -1,4 +1,7 @@
 const productServices = require("../services/productServices.js")
+const NotFoundError = require("../errors/NotFoundError.js")
+const ValidationError = require("../errors/ValidationError.js")
+const { validateFilters } = require("../middleware/validateProductFilters.js")
 
 const getAllProducts = async(req,res,next)=>{
     try{
@@ -16,7 +19,7 @@ const getProductById=async(req,res,next)=>{
         const id=req.params.id
         const product=await productServices.getProductById(id)
         if(!product){
-            return res.status(404).json({message:`product with id : '${id}' not found`})
+            throw new NotFoundError(`Product with id : ${id} not found!`)
         }
         return res.status(200).json(product)
     }catch(error){
@@ -29,13 +32,14 @@ const postProduct=async(req,res,next)=>{
         const {title,price,category,condition,year,seller,description}=req.body
 
         if(!title || !price || !category|| !condition ||!year || !seller || !description)
-            return res.status(400).json({message:"All fields are required (title, price, category, condition, year, seller, description) !"})
+            throw new ValidationError("All fields are required (title, price, category, condition, year, seller, description) !")
 
         if(typeof price!=="number" || price<=0)
-            return res.status(400).json({message:"Price must be a number and must be greater than zero !"})
+            throw new ValidationError("Price must be a number and must be greater than zero !")
+            
 
         if(typeof year!=="number" || year<=0)
-            return res.status(400).json({message:"Year must be a number and greater than zero !"})
+            throw new ValidationError("Year must be a number and greater than zero !")
 
         const newProduct=await productServices.createProduct({
             title,
@@ -59,18 +63,18 @@ const putProduct=async(req,res,next)=>{
         const updates=req.body
         if(updates.price!==undefined){
             if(typeof updates.price!=='number' || updates.price<=0){
-                return res.status(400).json({message:"price must be a number and greater than zero"})
+                throw new ValidationError("price must be a number and greater than zero")
             }
         }
         if(updates.year!==undefined){
             if(typeof updates.year!=='number' || updates.year<=0){
-                return res.status(400).json({message:"year must be a number and greater than zero"})
+                throw new ValidationError("year must be a number and greater than zero")
             }
         }
 
         const updatedProduct=await productServices.updateProduct(id,updates)
         if(!updatedProduct){
-            return res.status(404).json({message:`Product with id : ${id} not found`})
+            throw new NotFoundError(`Product with id : ${id} not found`)
         }
 
         return res.status(200).json(updatedProduct)
@@ -86,7 +90,7 @@ const deleteProduct=async(req,res,next)=>{
         const isDeleted=await productServices.deleteProduct(id)
 
         if(!isDeleted){
-            return res.status(404).json({message:`Product with id : ${id} not found`})
+            throw new NotFoundError(`Product with id : ${id} not found`)
         }
 
         return res.status(200).json({message:`Product with id : ${id} is deleted`})
