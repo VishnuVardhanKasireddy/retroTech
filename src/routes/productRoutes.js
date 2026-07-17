@@ -5,6 +5,8 @@ const router=express.Router();
 
 router.get("/",validateFilters,productController.getAllProducts)
 
+router.get("/categories",productController.getCategories)
+
 router.get("/:id",productController.getProductById)
 
 router.post("/",productController.postProduct)

@@ -119,10 +119,19 @@ const deleteProduct=async(id)=>{
     return true
 }
 
+const getCategories=async()=>{
+    const products=await fileHandler.readProducts()
+
+    const categories = [ ...new Set(products.map(p=>p.category))]
+
+    return categories
+}
+
 module.exports={
     getAllProducts,
     getProductById,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getCategories
 }
