@@ -12,6 +12,11 @@ const getAllProducts=async(filters)=>{
             return p.category.toLowerCase()===filters.category.toLowerCase()
         })
     }
+    if(filters.seller?.trim()){
+        products=products.filter(p=>{
+            return p.seller.toLowerCase()===filters.seller.trim().toLowerCase()
+        })
+    }
     if(filters.minPrice){
         products=products.filter(p=>{
             return p.price>=Number(filters.minPrice)
