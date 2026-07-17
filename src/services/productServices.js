@@ -60,8 +60,8 @@ const getAllProducts=async(filters)=>{
         products
     }
 }
-const getProductById=(id)=>{
-    const products=fileHandler.readProducts()
+const getProductById=async(id)=>{
+    const products=await fileHandler.readProducts()
 
     const numericId=Number(id)
 

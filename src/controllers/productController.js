@@ -1,6 +1,6 @@
 const productServices = require("../services/productServices.js")
 
-const getAllProducts = async(req,res)=>{
+const getAllProducts = async(req,res,next)=>{
     try{
         const filters=req.query
 
@@ -8,27 +8,23 @@ const getAllProducts = async(req,res)=>{
 
         return res.status(200).json(products)
     }catch(error){
-        console.log("Error in getAllProducts controller : ",error)
-        return res.status(500).json({
-            error : "Internal server error"
-        })
+        next(error)
     }
 }
-const getProductById=(req,res)=>{
+const getProductById=async(req,res,next)=>{
     try{
         const id=req.params.id
-        const product=productServices.getProductById(id)
+        const product=await productServices.getProductById(id)
         if(!product){
             return res.status(404).json({message:`product with id : '${id}' not found`})
         }
         return res.status(200).json(product)
     }catch(error){
-        console.log(`Error at getProductById controller : ${error}`)
-        res.status(500).json({error:"Internal server error"})
+        next(error)
     }
 }
 
-const postProduct=async(req,res)=>{
+const postProduct=async(req,res,next)=>{
     try{
         const {title,price,category,condition,year,seller,description}=req.body
 
@@ -53,12 +49,11 @@ const postProduct=async(req,res)=>{
 
         return res.status(201).json(newProduct)
     }catch(error){
-        console.error(`Error at postProduct : ${error}`)
-        return res.status(500).json({message:`Internal server error !`})
+        next(error)
     }
 }
 
-const putProduct=async(req,res)=>{
+const putProduct=async(req,res,next)=>{
     try{
         const {id}=req.params
         const updates=req.body
@@ -69,7 +64,7 @@ const putProduct=async(req,res)=>{
         }
         if(updates.year!==undefined){
             if(typeof updates.year!=='number' || updates.year<=0){
-                return res.status(400).json({messsage:"year must be a number and greater than zero"})
+                return res.status(400).json({message:"year must be a number and greater than zero"})
             }
         }
 
@@ -80,12 +75,11 @@ const putProduct=async(req,res)=>{
 
         return res.status(200).json(updatedProduct)
     }catch(error){
-        console.error(`Error found at putProduct controller : ${error}`)
-        return res.status(500).json({message:"Internal server error!"})
+        next(error)
     }
 }
 
-const deleteProduct=async(req,res)=>{
+const deleteProduct=async(req,res,next)=>{
     try{
         const {id}=req.params
         
@@ -97,19 +91,18 @@ const deleteProduct=async(req,res)=>{
 
         return res.status(200).json({message:`Product with id : ${id} is deleted`})
     }catch(error){
-        console.error(`Error found at deleteProduct Controller : ${error}`)
-        return res.status(500).json({message:"Internal server error!"})
+        next(error)
     }
 }
 
-const getCategories=async(req,res)=>{
+const getCategories=async(req,res,next)=>{
     try{
+        
         const categories=await productServices.getCategories()
 
         return res.status(200).json(categories)
     }catch(error){
-        console.error(`Error found at getCategories controller : ${error}`)
-        return res.status(500).json({message:"Internal server error"})
+        next(error)
     }
 }
 
