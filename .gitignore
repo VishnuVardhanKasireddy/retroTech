@@ -1,4 +1,12 @@
+# Dependencies
 node_modules/
+frontend/node_modules/
 
+# Environment variables
 .env
 
+# Test coverage
+coverage/
+
+# Build output
+frontend/dist/
