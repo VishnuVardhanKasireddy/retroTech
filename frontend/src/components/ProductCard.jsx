@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'
 import './ProductCard.css'
+
 function ProductCard({product}){
 
     return (
@@ -8,6 +10,7 @@ function ProductCard({product}){
             <p>category : {product.category}</p>
             <p>condition : {product.condition}</p>
             <p>seller : {product.seller}</p>
+            <Link to={`/products/${product.id}`}>View Details</Link>
         </div>
     )
 }
