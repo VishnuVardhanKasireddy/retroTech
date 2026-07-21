@@ -4,7 +4,7 @@ const {errorHandler}=require("./middleware/errorHandler.js")
 const app=express()
 const cors = require("cors")
 
-app.use(cors)
+app.use(cors())
 app.use(express.json());
 
 app.get("/health",(req,res)=>{
