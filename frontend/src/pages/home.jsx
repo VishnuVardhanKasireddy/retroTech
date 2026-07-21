@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
 import api from '../api/axios'
+import './home.css'
+import ProductCard from '../components/ProductCard'
 
 function Home(){
     
@@ -10,9 +12,6 @@ function Home(){
             
             const response = await api.get("/api/products");
 
-            console.log("Response:", response);
-            console.log("Data:", response.data.products);
-
             setProducts(response.data.products);
         
         }
@@ -20,18 +19,18 @@ function Home(){
         fetchProducts()
     },[])   
 
-    console.log(products)
+    
     return (
         <>
             <h1>Retro-Tech</h1>
-            {
-                products.map((product)=>(
-                    <div key={product.id}>
-                        <h2>{product.title}</h2>
-                        <p>{product.price}</p>
-                    </div>
-                ))
-            }
+            <div className="products-container">
+                
+                {
+                    products.map((product)=>(
+                        <ProductCard key={product.id} product={product}/>
+                    ))
+                }
+            </div>
         </>
     )
 
