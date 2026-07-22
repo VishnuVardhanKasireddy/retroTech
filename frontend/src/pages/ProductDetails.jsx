@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import api from '../api/axios'
+import './ProductDetails.css'
 
 function ProductDetails(){
     const { id } = useParams()

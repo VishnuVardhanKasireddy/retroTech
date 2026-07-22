@@ -88,5 +88,35 @@
     "year": 1985,
     "seller": "RetroGamer85",
     "description": "Original NES console with two controllers and cables. Tested and working perfectly."
+  },
+  {
+    "id": 11,
+    "title": "Nintendo Game Boy Advance",
+    "price": 6200,
+    "category": "Gaming",
+    "condition": "Good",
+    "year": 2001,
+    "seller": "Sharma Electronics",
+    "description": "Original Game Boy Advance with minor scratches. Fully functional and includes charger."
+  },
+  {
+    "id": 12,
+    "title": "IBM ThinkPad T42",
+    "price": 8500,
+    "category": "Laptop",
+    "condition": "Refurbished",
+    "year": 2004,
+    "seller": "Retro Computers Hyderabad",
+    "description": "Classic ThinkPad with Windows XP installed. Perfect for collectors and retro software enthusiasts."
+  },
+  {
+    "id": 13,
+    "title": "Casio FX-991MS Calculator",
+    "price": 900,
+    "category": "Calculator",
+    "condition": "Used",
+    "year": 2017,
+    "seller": " Student Hub",
+    "description": " Scientific calculator in good condition. All buttons and display work perfectly."
   }
 ]

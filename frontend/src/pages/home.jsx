@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import api from '../api/axios'
 import './home.css'
 import ProductCard from '../components/ProductCard'
+import { Link } from "react-router-dom"
 
 function Home(){
     
@@ -30,6 +31,7 @@ function Home(){
                         <ProductCard key={product.id} product={product}/>
                     ))
                 }
+            <Link to={`/add-product`}>+ Add Product +</Link>
             </div>
         </>
     )
