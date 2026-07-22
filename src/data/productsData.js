@@ -81,8 +81,8 @@
   },
   {
     "id": 10,
-    "title": "Nintendo Entertainment System",
-    "price": 150,
+    "title": "Nintendo Environment System",
+    "price": 1500,
     "category": "Electronics",
     "condition": "Used",
     "year": 1985,

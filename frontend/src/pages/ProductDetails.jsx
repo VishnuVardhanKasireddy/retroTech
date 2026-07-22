@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import api from '../api/axios'
 import './ProductDetails.css'
@@ -28,6 +29,8 @@ function ProductDetails(){
             <p>Description : {product.description}</p>
             <p>Condition : {product.condition}</p>
             <p>seller : {product.seller}</p>
+
+            <Link to={`/edit-product/${id}`}>Edit Product</Link>
         </div>
     )
 }
