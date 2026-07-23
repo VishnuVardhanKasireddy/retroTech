@@ -22,3 +22,18 @@
 .product-details strong {
     font-weight: 600;
 }
+
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+}

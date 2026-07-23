@@ -80,16 +80,6 @@
     "description": "Portable cassette player with FM/AM radio."
   },
   {
-    "id": 10,
-    "title": "Nintendo Environment System",
-    "price": 1500,
-    "category": "Electronics",
-    "condition": "Used",
-    "year": 1985,
-    "seller": "RetroGamer85",
-    "description": "Original NES console with two controllers and cables. Tested and working perfectly."
-  },
-  {
     "id": 11,
     "title": "Nintendo Game Boy Advance",
     "price": 6200,
